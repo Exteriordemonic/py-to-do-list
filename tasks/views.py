@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from tasks.forms import CreateTaskForm, CreateTagForm
 from tasks.models import Task, Tag
+from django.shortcuts import render
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -99,3 +100,9 @@ def undo_task(request, pk):
     task.completed = False
     task.save()
     return redirect(reverse_lazy("index"))
+
+
+def search_tasks(request):
+    query = request.GET.get("q")
+    tasks = Task.objects.filter(user=request.user, content__icontains=query)
+    return render(request, "pages/index.html", {"tasks": tasks})
