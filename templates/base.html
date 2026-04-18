@@ -9,10 +9,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="{% block meta-description %}Create and manage your tasks{% endblock meta-description %}" />
+    <meta name="keywords" content="{% block meta-keywords %}tasks, tags, productivity{% endblock meta-keywords %}" />
+    <meta name="author" content="{% block meta-author %}TO DO APP{% endblock meta-author %}" />
+    <meta name="robots" content="{% block meta-robots %}index, follow{% endblock meta-robots %}" />
+    <meta name="googlebot" content="{% block meta-googlebot %}index, follow{% endblock meta-googlebot %}" />
+    <meta name="google" content="{% block meta-google %}index, follow{% endblock meta-google %}" />
+    <meta name="google-site-verification" content="{% block meta-google-site-verification %}google-site-verification=google-site-verification{% endblock meta-google-site-verification %}" />
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>{% block meta-title %}TO DO APP{% endblock meta-title %}</title>
 
     <!-- Custom fonts for this template-->
     <link
