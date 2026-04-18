@@ -128,6 +128,7 @@ def undo_task(request, pk):
         return redirect(reverse_lazy("index"))
 
 
+@login_required
 def search_tasks(request):
     query = request.GET.get("q")
     tasks = (
