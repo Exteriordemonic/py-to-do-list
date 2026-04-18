@@ -77,6 +77,14 @@ class TagUpdateView(LoginRequiredMixin, UpdateView):
         return kwargs
 
 
+class TagDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tag
+    success_url = reverse_lazy("tasks:tag-list")
+
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user)
+
+
 @login_required
 def complete_task(request, pk):
     task = Task.objects.get(pk=pk, user=request.user)
