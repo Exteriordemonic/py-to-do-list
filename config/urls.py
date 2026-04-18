@@ -24,7 +24,9 @@ from config.views import index_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include(("users.urls", "users"), namespace="users")),
+    path("tasks/", include(("tasks.urls", "tasks"), namespace="tasks")),
     path("", index_view, name="index"),
+    path("select2/", include("django_select2.urls")),
 ]
 
 if settings.DEBUG:
