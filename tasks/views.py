@@ -25,6 +25,13 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CreateTaskForm
     success_url = reverse_lazy("index")
 
+    def get_queryset(self):
+        return (
+            Task.objects.filter(user=self.request.user)
+            .select_related("user")
+            .prefetch_related("tags")
+        )
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
@@ -37,7 +44,11 @@ class TaskListView(LoginRequiredMixin, ListView):
     context_object_name = "tasks"
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        return (
+            Task.objects.filter(user=self.request.user)
+            .select_related("user")
+            .prefetch_related("tags")
+        )
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
@@ -45,7 +56,11 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("index")
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        return (
+            Task.objects.filter(user=self.request.user)
+            .select_related("user")
+            .prefetch_related("tags")
+        )
 
 
 class TagListView(LoginRequiredMixin, ListView):
@@ -53,7 +68,9 @@ class TagListView(LoginRequiredMixin, ListView):
     context_object_name = "tags"
 
     def get_queryset(self):
-        return Tag.objects.filter(user=self.request.user)
+        return Tag.objects.filter(user=self.request.user).select_related(
+            "user"
+        )
 
 
 class TagCreateView(LoginRequiredMixin, CreateView):
@@ -72,6 +89,11 @@ class TagUpdateView(LoginRequiredMixin, UpdateView):
     form_class = CreateTagForm
     success_url = reverse_lazy("tasks:tag-list")
 
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user).select_related(
+            "user"
+        )
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
@@ -83,26 +105,34 @@ class TagDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("tasks:tag-list")
 
     def get_queryset(self):
-        return Tag.objects.filter(user=self.request.user)
+        return Tag.objects.filter(user=self.request.user).select_related(
+            "user"
+        )
 
 
 @login_required
 def complete_task(request, pk):
-    task = Task.objects.get(pk=pk, user=request.user)
-    task.completed = True
-    task.save()
-    return redirect(reverse_lazy("index"))
+    if request.method == "POST":
+        task = Task.objects.get(pk=pk, user=request.user)
+        task.completed = True
+        task.save()
+        return redirect(reverse_lazy("index"))
 
 
 @login_required
 def undo_task(request, pk):
-    task = Task.objects.get(pk=pk, user=request.user)
-    task.completed = False
-    task.save()
-    return redirect(reverse_lazy("index"))
+    if request.method == "POST":
+        task = Task.objects.get(pk=pk, user=request.user)
+        task.completed = False
+        task.save()
+        return redirect(reverse_lazy("index"))
 
 
 def search_tasks(request):
     query = request.GET.get("q")
-    tasks = Task.objects.filter(user=request.user, content__icontains=query)
+    tasks = (
+        Task.objects.filter(user=request.user, content__icontains=query)
+        .select_related("user")
+        .prefetch_related("tags")
+    )
     return render(request, "pages/index.html", {"tasks": tasks})

@@ -37,13 +37,19 @@
         <i class="fa fa-trash mr-1"></i>Delete
       </a>
       {% if task.completed %}
-      <a class="btn btn-sm btn-outline-secondary ml-auto" href="{% url 'tasks:task-undo' task.pk %}">
-        <i class="fa fa-undo mr-1"></i>Undo
-      </a>
+      <form method="post" action="{% url 'tasks:task-undo' task.pk %}" class="ml-auto mb-0">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-secondary">
+          <i class="fa fa-undo mr-1"></i>Undo
+        </button>
+      </form>
       {% else %}
-      <a class="btn btn-sm btn-success ml-auto" href="{% url 'tasks:task-complete' task.pk %}">
-        <i class="fa fa-check-circle mr-1"></i>Complete
-      </a>
+      <form method="post" action="{% url 'tasks:task-complete' task.pk %}" class="ml-auto mb-0">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-success">
+          <i class="fa fa-check-circle mr-1"></i>Complete
+        </button>
+      </form>
       {% endif %}
     </div>
   </div>
