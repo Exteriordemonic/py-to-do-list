@@ -40,4 +40,4 @@ class Task(models.Model):
     class Meta:
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
-        ordering = ["-completed", "-created_at"]
+        ordering = ["completed", "-created_at"]
