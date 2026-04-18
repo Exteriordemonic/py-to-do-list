@@ -20,8 +20,8 @@
             <span>Home</span></a>
     </li>
     <!-- Nav Item - Tasks -->
-    <li class="nav-item">
-        <a class="nav-link" href="">
+    <li class="nav-item {% if '/tasks/tags/' in request.path %}active{% endif %}">
+        <a class="nav-link" href="{% url 'tasks:tag-list' %}">
             <i class="fas fa-fw fa-tags"></i>
             <span>Tags</span>
         </a>

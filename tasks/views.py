@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 
 from django.contrib.auth.decorators import login_required
 from tasks.forms import CreateTaskForm
-from tasks.models import Task
+from tasks.models import Task, Tag
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -45,6 +45,14 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
+
+
+class TagListView(LoginRequiredMixin, ListView):
+    model = Tag
+    context_object_name = "tags"
+
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user)
 
 
 @login_required
