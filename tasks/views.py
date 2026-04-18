@@ -12,7 +12,7 @@ from django.shortcuts import render
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = CreateTaskForm
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks:index")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -23,7 +23,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = CreateTaskForm
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks:index")
 
     def get_queryset(self):
         return (
@@ -53,7 +53,7 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks:index")
 
     def get_queryset(self):
         return (
@@ -76,7 +76,7 @@ class TagListView(LoginRequiredMixin, ListView):
 class TagCreateView(LoginRequiredMixin, CreateView):
     model = Tag
     form_class = CreateTagForm
-    success_url = reverse_lazy("tasks:tag-list")
+    success_url = reverse_lazy("tasks:index")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -116,7 +116,7 @@ def complete_task(request, pk):
         task = Task.objects.get(pk=pk, user=request.user)
         task.completed = True
         task.save()
-        return redirect(reverse_lazy("index"))
+        return redirect(reverse_lazy("tasks:index"))
 
 
 @login_required
@@ -125,7 +125,7 @@ def undo_task(request, pk):
         task = Task.objects.get(pk=pk, user=request.user)
         task.completed = False
         task.save()
-        return redirect(reverse_lazy("index"))
+        return redirect(reverse_lazy("tasks:index"))
 
 
 @login_required
