@@ -33,9 +33,9 @@
       <a class="btn btn-sm btn-outline-primary mr-2" href="{% url 'tasks:task-update' task.pk %}">
         <i class="fa fa-pencil-alt mr-1"></i>Edit
       </a>
-      <button class="btn btn-sm btn-outline-danger mr-2">
+      <a class="btn btn-sm btn-outline-danger mr-2" href="{% url 'tasks:task-delete' task.pk %}">
         <i class="fa fa-trash mr-1"></i>Delete
-      </button>
+      </a>
       {% if task.completed %}
       <a class="btn btn-sm btn-outline-secondary ml-auto" href="{% url 'tasks:task-undo' task.pk %}">
         <i class="fa fa-undo mr-1"></i>Undo

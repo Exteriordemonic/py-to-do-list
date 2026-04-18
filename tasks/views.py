@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -34,6 +34,14 @@ class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "pages/index.html"
     context_object_name = "tasks"
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
+
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy("index")
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
