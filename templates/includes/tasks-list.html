@@ -9,10 +9,12 @@
         Created at &nbsp;<span class="font-weight-bold text-dark"
           >{{ task.created_at|date:"d.m.Y H:i" }}</span
         >
+        {% if task.deadline %}
         &nbsp;<i class="fa fa-arrow-right text-secondary mx-1"></i>&nbsp;
-        <span class="text-danger font-weight-bold">
-          <i class="fa fa-clock mr-1"></i>Deadline: {{ task.deadline|date:"d.m.Y H:i"}}
-        </span>
+          <span class="text-danger font-weight-bold">
+            <i class="fa fa-clock mr-1"></i>Deadline: {{ task.deadline|date:"d.m.Y H:i"}}
+          </span>
+        {% endif %}
       </li>
     </ul>
 
@@ -28,9 +30,9 @@
     </ul>
 
     <div class="d-flex flex-wrap align-items-center">
-      <button class="btn btn-sm btn-outline-primary mr-2">
+      <a class="btn btn-sm btn-outline-primary mr-2" href="{% url 'tasks:task-update' task.pk %}">
         <i class="fa fa-pencil-alt mr-1"></i>Edit
-      </button>
+      </a>
       <button class="btn btn-sm btn-outline-danger mr-2">
         <i class="fa fa-trash mr-1"></i>Delete
       </button>

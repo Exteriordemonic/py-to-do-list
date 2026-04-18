@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -9,6 +9,17 @@ from tasks.models import Task
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
+    model = Task
+    form_class = CreateTaskForm
+    success_url = reverse_lazy("index")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = CreateTaskForm
     success_url = reverse_lazy("index")
