@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 
 from django.contrib.auth.decorators import login_required
-from tasks.forms import CreateTaskForm
+from tasks.forms import CreateTaskForm, CreateTagForm
 from tasks.models import Task, Tag
 
 
@@ -53,6 +53,28 @@ class TagListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Tag.objects.filter(user=self.request.user)
+
+
+class TagCreateView(LoginRequiredMixin, CreateView):
+    model = Tag
+    form_class = CreateTagForm
+    success_url = reverse_lazy("tasks:tag-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+
+class TagUpdateView(LoginRequiredMixin, UpdateView):
+    model = Tag
+    form_class = CreateTagForm
+    success_url = reverse_lazy("tasks:tag-list")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
 
 @login_required

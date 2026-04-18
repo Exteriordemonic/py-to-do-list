@@ -78,3 +78,24 @@ class CreateTaskForm(forms.ModelForm):
             self.save_m2m()
 
         return instance
+
+
+class CreateTagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ["name"]
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+
+        self.fields["name"].widget = forms.TextInput(
+            attrs={"class": "form-control"}
+        )
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.user = self.user
+        if commit:
+            instance.save()
+            return instance
