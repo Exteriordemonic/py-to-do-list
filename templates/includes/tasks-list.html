@@ -1,5 +1,5 @@
 {% for task in tasks %}
-<div class="card mb-3 shadow-sm">
+<div class="card mb-3 shadow-sm {% if task.completed %}bg-light{% endif %}">
   <div class="card-body">
     <h5 class="card-title font-weight-bold mb-1">{{ task.content }}</h5>
 
@@ -20,7 +20,6 @@
       {% for tag in task.tags.all %}
       <li class="list-inline-item">
         <a
-          href="#"
           class="badge badge-pill badge-secondary text-decoration-none"
           >{{ tag.name }}</a
         >
@@ -36,13 +35,13 @@
         <i class="fa fa-trash mr-1"></i>Delete
       </button>
       {% if task.completed %}
-      <button class="btn btn-sm btn-outline-secondary ml-auto">
+      <a class="btn btn-sm btn-outline-secondary ml-auto" href="{% url 'tasks:task-undo' task.pk %}">
         <i class="fa fa-undo mr-1"></i>Undo
-      </button>
+      </a>
       {% else %}
-      <button class="btn btn-sm btn-success ml-auto">
+      <a class="btn btn-sm btn-success ml-auto" href="{% url 'tasks:task-complete' task.pk %}">
         <i class="fa fa-check-circle mr-1"></i>Complete
-      </button>
+      </a>
       {% endif %}
     </div>
   </div>
