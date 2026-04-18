@@ -1,3 +1,38 @@
 {% extends "base.html" %}
 
-homepage
+{% block page-header-title %}
+    Have a productive day!
+{% endblock page-header-title %}
+
+{% block page-header-actions %}
+<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    class="fas fa-plus fa-sm text-white-50"></i> New Task</a>
+{% endblock page-header-actions %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                <h5 class="card-title">Tasks</h5>
+                {% else %}
+                <div class="text-center my-4">
+                    <h5 class="card-title mb-3">Please log in to view your tasks</h5>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#login" class="btn btn-primary mr-2 px-4">Login</a>
+                    </div>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                    <span class="align-self-center text-muted small">Don't have an account?</span>
+                        <a href="#register" class="btn btn-link btn-sm">Register</a>
+                    </div>
+                </div>
+   
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
