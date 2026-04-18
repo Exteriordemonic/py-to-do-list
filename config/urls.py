@@ -19,13 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from debug_toolbar.toolbar import debug_toolbar_urls
-from tasks.views import TaskListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include(("users.urls", "users"), namespace="users")),
-    path("tasks/", include(("tasks.urls", "tasks"), namespace="tasks")),
-    path("", TaskListView.as_view(), name="index"),
+    path("", include(("tasks.urls", "tasks"), namespace="tasks")),
     path("select2/", include("django_select2.urls")),
 ]
 
