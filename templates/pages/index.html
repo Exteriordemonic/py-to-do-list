@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page-header-title %}
+    Have a productive day!
+{% endblock page-header-title %}
+
+{% block page-header-actions %}
+<a href="{% url 'tasks:task-create' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    class="fas fa-plus fa-sm text-white-50"></i> New Task</a>
+{% endblock page-header-actions %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                {% include "includes/tasks-list.html" with tasks=tasks %}
+                {% else %}
+                {% include "includes/login-information.html" %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

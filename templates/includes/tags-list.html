@@ -1,0 +1,47 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tag in tags %}
+          <tr>
+            <td>{{ tag.name }}</td>
+            <td>
+              <a
+                href="{% url 'tasks:tag-update' tag.pk %}"
+                class="btn btn-primary"
+                >Update</a
+              >
+            </td>
+            <td>
+              <a
+                href="{% url 'tasks:tag-delete' tag.pk %}"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
+
+          {% empty %}
+          <tr>
+            <td colspan="3" class="text-center">No tags found</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

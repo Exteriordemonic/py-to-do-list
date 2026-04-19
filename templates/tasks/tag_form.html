@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page-header-title %}
+    {{ object|yesno:"Edit,Create" }}Tag
+{% endblock page-header-title %}
+
+{% block page-header-actions %}
+    {% if object %}
+      <a href="{% url 'tasks:tag-list' %}" class="btn btn-outline">Cancel</a>
+    {% endif %}
+{% endblock page-header-actions %}
+
+{% block content %}
+  <div class="card bg-base-100 shadow-md border border-base-content/10 mt-8 max-w-lg mx-auto col-12 col-sm-6">
+    <div class="card-body">
+      <form method="post" class="flex flex-col gap-6">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn btn-primary">
+            {{ object|yesno:"Save,Create" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

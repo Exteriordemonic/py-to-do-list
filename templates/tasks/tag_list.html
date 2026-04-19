@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page-header-title %}
+    Tags
+{% endblock page-header-title %}
+
+{% block page-header-actions %}
+    <a href="{% url 'tasks:tag-create' %}" class="btn btn-primary">
+        <i class="fa fa-plus mr-1"></i>Add Tag
+    </a>    
+{% endblock page-header-actions %}
+
+{% block content %}
+  {% include "includes/tags-list.html" with tags=tags %}
+{% endblock %}
