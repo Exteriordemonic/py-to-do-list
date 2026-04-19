@@ -172,3 +172,29 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+
+# Font Awesome: webfont CSS only uses all.min.css + webfonts/
+static/vendor/fontawesome-free/svgs/
+static/vendor/fontawesome-free/js/
+static/vendor/fontawesome-free/scss/
+static/vendor/fontawesome-free/less/
+static/vendor/fontawesome-free/metadata/
+static/vendor/fontawesome-free/sprites/
+# Other FA CSS bundles not referenced by base.html
+static/vendor/fontawesome-free/css/all.css
+static/vendor/fontawesome-free/css/brands.css
+static/vendor/fontawesome-free/css/brands.min.css
+static/vendor/fontawesome-free/css/fontawesome.css
+static/vendor/fontawesome-free/css/regular.css
+static/vendor/fontawesome-free/css/regular.min.css
+static/vendor/fontawesome-free/css/solid.css
+static/vendor/fontawesome-free/css/solid.min.css
+static/vendor/fontawesome-free/css/svg-with-js.css
+static/vendor/fontawesome-free/css/v4-shims.css
+# Bootstrap theme sources / demos (not linked from base.html)
+static/vendor/bootstrap/scss/
+static/js/demo/
+# SB Admin non-minified copy (optional — only if you standardize on .min.js)
+# static/js/sb-admin-2.js
+# Entire vendors not referenced from base.html (verify nothing else uses them)
+static/vendor/chart.js/
