@@ -199,3 +199,5 @@ static/js/sb-admin-2.js
 static/css/sb-admin-2.css
 # Entire vendors not referenced from base.html (verify nothing else uses them)
 static/vendor/chart.js/
+*.map
+.claude/settings.local.json
