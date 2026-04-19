@@ -25,7 +25,7 @@ class TagSelect2Widget(ModelSelect2TagWidget):
         created_pks = set()
 
         for value in values:
-            if value.isdigit() and self.queryset.get(pk=int(value)):
+            if value.isdigit() and self.queryset.filter(pk=int(value)).exists():
                 existing_pks.add(int(value))
             else:
                 tag, _ = Tag.objects.get_or_create(
