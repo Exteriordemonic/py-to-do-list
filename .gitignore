@@ -194,7 +194,8 @@ static/vendor/fontawesome-free/css/v4-shims.css
 # Bootstrap theme sources / demos (not linked from base.html)
 static/vendor/bootstrap/scss/
 static/js/demo/
-# SB Admin non-minified copy (optional — only if you standardize on .min.js)
-# static/js/sb-admin-2.js
+# SB Admin non-minified copies (base.html uses .min only)
+static/js/sb-admin-2.js
+static/css/sb-admin-2.css
 # Entire vendors not referenced from base.html (verify nothing else uses them)
 static/vendor/chart.js/
