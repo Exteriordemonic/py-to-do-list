@@ -198,3 +198,4 @@ static/js/demo/
 # static/js/sb-admin-2.js
 # Entire vendors not referenced from base.html (verify nothing else uses them)
 static/vendor/chart.js/
+*.map
