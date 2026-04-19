@@ -1,7 +1,7 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from tasks.forms import CreateTaskForm, CreateTagForm
@@ -113,7 +113,7 @@ class TagDeleteView(LoginRequiredMixin, DeleteView):
 @login_required
 def complete_task(request, pk):
     if request.method == "POST":
-        task = Task.objects.get_object_or_404(pk=pk, user=request.user)
+        task = get_object_or_404(Task, pk=pk, user=request.user)
         task.completed = True
         task.save()
         return redirect(reverse_lazy("tasks:index"))
@@ -122,7 +122,7 @@ def complete_task(request, pk):
 @login_required
 def undo_task(request, pk):
     if request.method == "POST":
-        task = Task.objects.get_object_or_404(pk=pk, user=request.user)
+        task = get_object_or_404(Task, pk=pk, user=request.user)
         task.completed = False
         task.save()
         return redirect(reverse_lazy("tasks:index"))
