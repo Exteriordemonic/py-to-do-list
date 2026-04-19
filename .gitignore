@@ -199,3 +199,4 @@ static/js/demo/
 # Entire vendors not referenced from base.html (verify nothing else uses them)
 static/vendor/chart.js/
 *.map
+.claude/settings.local.json
