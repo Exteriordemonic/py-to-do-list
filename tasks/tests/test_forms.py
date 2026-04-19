@@ -1,12 +1,10 @@
 from datetime import timedelta
 from django.utils import timezone
-import pytest
 
 from tasks.forms import CreateTaskForm
 from tasks.models import Tag
 
 
-@pytest.mark.django_db
 class TestCreateTaskForm:
     def test_valid_form(self, test_user):
         form = CreateTaskForm(
